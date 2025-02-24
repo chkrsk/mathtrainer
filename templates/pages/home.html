@@ -11,10 +11,9 @@
     <main>
         <form method="post">
 
-            <!--
-            code python
-            form fields
-            -->
+            {% csrf_token %}
+
+            {{ form.as_p }}
 
             <input type="submit" value="Submit">
 
