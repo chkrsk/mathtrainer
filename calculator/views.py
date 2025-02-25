@@ -65,6 +65,7 @@ def calculate(request):
         'first_num': first_num,
         'second_num': second_num,
         'num_of_problems': num_of_problems,
+        'operation': dict(Menu.math_operations)[operation[0]],
         'res': res
     }
 
