@@ -30,15 +30,42 @@ def homepage(request):
 def calculate(request):
 
     # var_field passes how many digits there should be in in the number
-    first_field = request.session.get('first_field'),
-    second_field = request.session.get('second_field'),
-    operation = request.session.get('operation'),
-    num_of_problems = request.session.get('num_of_problems'),
+    first_field = request.session.get('first_field', 1),
+    second_field = request.session.get('second_field', 1),
+    operation = request.session.get('operation', 'addition'),
+    num_of_problems = request.session.get('num_of_problems', 10),
 
     first_num_extrema = 10 ** (first_field[0] - 1), (10 ** first_field[0]) - 1
     second_num_extrema = 10 ** (second_field[0] - 1), (10 ** second_field[0]) - 1
 
-    first_num = random.randint(first_num_extrema[0], first_num_extrema[1])
-    second_num = random.randint(second_num_extrema[0], second_num_extrema[1])
+    if operation[0] != 'division':
+        first_num = random.randint(first_num_extrema[0], first_num_extrema[1])
+        second_num = random.randint(second_num_extrema[0], second_num_extrema[1])
 
-    return render(request, 'pages/calculate.html')
+        if operation[0] == 'addition':
+            res = first_num + second_num
+        elif operation[0] == 'subtraction':
+            res = first_num - second_num
+        else: # multiplication
+            res = first_num * second_num
+
+    else:
+        while True:
+            quotient  = random.randint(first_num_extrema[0], first_num_extrema[1])
+            second_num = random.randint(second_num_extrema[0], second_num_extrema[1])
+
+            first_num = second_num * quotient
+            
+            if first_num <= first_num_extrema[1]:
+                break
+
+        res = first_num / second_num
+
+    context = {
+        'first_num': first_num,
+        'second_num': second_num,
+        'num_of_problems': num_of_problems,
+        'res': res
+    }
+
+    return render(request, 'pages/calculate.html', context)
