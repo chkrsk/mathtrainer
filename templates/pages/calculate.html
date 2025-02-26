@@ -1,1 +1,39 @@
-{{first_field}}
+{% extends "layouts/layout.html" %}
+{% block title %}Math Trainer - Calculation{% endblock title %}
+
+{% block content %}
+
+<p>Oblicz: {{ first_num }} + {{ second_num }}</p>
+<form id="check_form" method="post">
+    {% csrf_token %}
+    <input id="check" type="text" name="answer" autocomplete="off" oninput="checkInput()">
+</form>
+
+<p>Rozwiązane: {{ solved_problems }} / {{ num_of_problems }}</p>
+
+<script>
+    function checkInput() {
+        let input = document.getElementById("check");
+        let correctAnswer = {{ res|safe }};
+
+        if (parseInt(input.value) === correctAnswer) {  
+            document.getElementById("check_form").submit();
+        }
+    }
+    function setFocus() {
+        let input = document.getElementById("check");
+        input.focus();
+    }
+
+    document.addEventListener("DOMContentLoaded", setFocus);
+    document.getElementById("check").addEventListener("blur", setFocus);
+
+    document.getElementById("check").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    });
+    document.getElementById("check").focus();
+</script>
+
+{% endblock %}
