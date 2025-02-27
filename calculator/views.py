@@ -35,7 +35,7 @@ def calculate(request):
 
         if 'time' not in request.session:
             request.session['time'] = []
-        
+
         request.session['time'].append(time)
         request.session.modified = True
 
@@ -47,7 +47,7 @@ def calculate(request):
     # if solved_problems remember session
     # if 'solved_problems' not in request.session:
     #     request.session['solved_problems'] = 0
-    
+
     solved_problems = request.session.get('solved_problems', 0)
 
     if solved_problems > num_of_problems[0] - 1:
@@ -56,26 +56,41 @@ def calculate(request):
         return redirect('summary')
 
     first_num_extrema = 10 ** (first_field[0] - 1), (10 ** first_field[0]) - 1
-    second_num_extrema = 10 ** (second_field[0] - 1), (10 ** second_field[0]) - 1
-    
+    second_num_extrema = 10 ** (second_field[0] -
+                                1), (10 ** second_field[0]) - 1
+
     if operation[0] != 'division':
         first_num = random.randint(first_num_extrema[0], first_num_extrema[1])
-        second_num = random.randint(second_num_extrema[0], second_num_extrema[1])
+        second_num = random.randint(
+            second_num_extrema[0], second_num_extrema[1])
 
         if operation[0] == 'addition':
             res = first_num + second_num
         elif operation[0] == 'subtraction':
             res = first_num - second_num
-        else: # multiplication
+        else:  # multiplication
             res = first_num * second_num
 
     else:
         while True:
-            quotient  = random.randint(first_num_extrema[0], first_num_extrema[1])
-            second_num = random.randint(second_num_extrema[0], second_num_extrema[1])
+            
+            '''
+            When dividing, we want to obtain integers and none of these 
+            numbers can be longer than the number selected by the user.
+
+            For this reason we need to take the following steps:
+            1. the first number is the result of multiplying two numbers
+            2. we check whether the result is not longer than what the 
+               user selected (for the first number)
+            '''
+
+            quotient = random.randint(
+                first_num_extrema[0], first_num_extrema[1])
+            second_num = random.randint(
+                second_num_extrema[0], second_num_extrema[1])
 
             first_num = second_num * quotient
-            
+
             if first_num <= first_num_extrema[1]:
                 break
 
@@ -84,7 +99,6 @@ def calculate(request):
 
     solved_problems += 1
     request.session['solved_problems'] = solved_problems
-
 
     context = ({
         'first_num': first_num,
@@ -97,10 +111,15 @@ def calculate(request):
 
     return render(request, 'pages/calculate.html', context)
 
+
 def summary(request):
 
+    times = [float(t) for t in request.session.get("time", [])]
+    avg_time = sum(times) / len(times)
+
     context = {
-        'time': [t for t in request.session.get("time", [])],
+        'times': times,
+        'avg_time': avg_time,
     }
 
     return render(request, 'pages/summary.html', context)

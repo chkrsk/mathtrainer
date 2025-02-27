@@ -1,0 +1,12 @@
+{% extends "layouts/layout.html" %}
+{% block title %}Math Trainer - Calculation{% endblock title %}
+
+{% block content %}
+
+{% for t in times %}
+    {{ forloop.counter }} - {{ t }} <br>
+{% endfor %}
+
+{{ avg_time }}
+
+{% endblock %}
