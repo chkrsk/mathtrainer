@@ -7,16 +7,24 @@
 <form id="check_form" method="post">
     {% csrf_token %}
     <input id="check" type="text" name="answer" autocomplete="off" oninput="checkInput()">
+    <input type="hidden" name="time" id="time">
 </form>
 
 <p>Rozwiązane: {{ solved_problems }} / {{ num_of_problems }}</p>
 
 <script>
+
+    let start = Date.now()
+
     function checkInput() {
         let input = document.getElementById("check");
         let correctAnswer = {{ res|safe }};
 
-        if (parseInt(input.value) === correctAnswer) {  
+        if (parseInt(input.value) === correctAnswer) {
+            let elapsedTime = (Date.now() - start) / 1000;
+            
+            document.getElementById("time").value = elapsedTime;
+
             document.getElementById("check_form").submit();
         }
     }
