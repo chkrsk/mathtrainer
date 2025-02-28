@@ -20,6 +20,9 @@ def homepage(request):
     else:
         form = Menu()
 
+    # clean session
+    request.session.flush()
+
     context = {
         'form': form
     }
@@ -28,6 +31,10 @@ def homepage(request):
 
 
 def calculate(request):
+
+    # protect session
+    if "first_field" not in request.session or "second_field" not in request.session or "operation" not in request.session:
+        return redirect("homepage")
 
     # var_field passes how many digits there should be in in the number
     if request.method == 'POST':
@@ -43,11 +50,7 @@ def calculate(request):
     second_field = request.session.get('second_field', 1),
     operation = request.session.get('operation', 'addition'),
     num_of_problems = request.session.get('num_of_problems', 1),
-
-    # if solved_problems remember session
-    # if 'solved_problems' not in request.session:
-    #     request.session['solved_problems'] = 0
-
+    
     solved_problems = request.session.get('solved_problems', 0)
 
     if solved_problems > num_of_problems[0] - 1:
@@ -73,7 +76,7 @@ def calculate(request):
 
     else:
         while True:
-            
+
             '''
             When dividing, we want to obtain integers and none of these 
             numbers can be longer than the number selected by the user.
@@ -114,8 +117,14 @@ def calculate(request):
 
 def summary(request):
 
+    # protect session
+    if "first_field" not in request.session or "second_field" not in request.session or "operation" not in request.session:
+        return redirect("homepage")
+
     times = [float(t) for t in request.session.get("time", [])]
     avg_time = sum(times) / len(times)
+
+    request.session.flush()
 
     context = {
         'times': times,
