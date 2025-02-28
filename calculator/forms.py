@@ -14,4 +14,4 @@ class Menu(forms.Form):
     second_field = forms.IntegerField(min_value=1, required=True)
     operation = forms.ChoiceField(choices=math_operations, required=False)
     num_of_problems = forms.IntegerField(
-        min_value=1, required=False, label="number of problems")
+        min_value=1, required=True, label="number of problems")
