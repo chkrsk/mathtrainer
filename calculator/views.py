@@ -50,7 +50,7 @@ def calculate(request):
     second_field = request.session.get('second_field', 1),
     operation = request.session.get('operation', 'addition'),
     num_of_problems = request.session.get('num_of_problems', 1),
-    
+
     solved_problems = request.session.get('solved_problems', 0)
 
     if solved_problems > num_of_problems[0] - 1:
@@ -98,7 +98,6 @@ def calculate(request):
                 break
 
         res = first_num / second_num
-        solved_problems[0] += 1
 
     solved_problems += 1
     request.session['solved_problems'] = solved_problems
@@ -132,3 +131,11 @@ def summary(request):
     }
 
     return render(request, 'pages/summary.html', context)
+
+def abort(request):
+    
+    solved = len(request.session.get("time", []))
+    if not solved:
+        return redirect('homepage')
+    
+    return redirect('summary')
