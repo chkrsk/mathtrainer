@@ -7,6 +7,8 @@
     {{ forloop.counter }} - {{ t }} <br>
 {% endfor %}
 
-{{ avg_time }}
+<p>avg time: {{ avg_time }}</p>
+
+<a href="{% url 'homepage' %}">homepage</a>
 
 {% endblock %}

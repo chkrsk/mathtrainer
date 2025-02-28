@@ -123,8 +123,6 @@ def summary(request):
     times = [float(t) for t in request.session.get("time", [])]
     avg_time = sum(times) / len(times)
 
-    request.session.flush()
-
     context = {
         'times': times,
         'avg_time': avg_time,

@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<a href="{% url 'abort' %}"><button type="button">❌</button></a>
+
 <p>Oblicz: {{ first_num }} + {{ second_num }}</p>
 <form id="check_form" method="post">
     {% csrf_token %}
