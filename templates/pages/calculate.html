@@ -3,16 +3,27 @@
 
 {% block content %}
 
-<a href="{% url 'abort' %}"><button type="button">❌</button></a>
+<nav>
+    <a href="{% url 'homepage' %}">
+        <h1>Math Trainer</h1>
+    </a>
+</nav>
 
-<p>Oblicz: {{ first_num }} + {{ second_num }}</p>
-<form id="check_form" method="post">
-    {% csrf_token %}
-    <input id="check" type="text" name="answer" autocomplete="off" oninput="checkInput()">
-    <input type="hidden" name="time" id="time">
-</form>
-
-<p>Rozwiązane: {{ solved_problems }} / {{ num_of_problems }}</p>
+<main class='calculate_main'>
+    <div class="abort_panel">
+        <a href="{% url 'abort' %}"><button type="button">❌</button></a>
+        <p>abort</p>
+    </div>
+    <div class="form_container">
+        <form id="check_form" method="post">
+            <p>Oblicz: {{ first_num }} + {{ second_num }}</p>
+            {% csrf_token %}
+            <input id="check" type="text" name="answer" autocomplete="off" oninput="checkInput()">
+            <input type="hidden" name="time" id="time">
+            <p>Rozwiązane: {{ solved_problems }} / {{ num_of_problems }}</p>
+        </form>
+    </div>
+</main>
 
 <script>
 

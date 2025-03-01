@@ -3,12 +3,22 @@
 
 {% block content %}
 
-{% for t in times %}
-    {{ forloop.counter }} - {{ t }} <br>
-{% endfor %}
+<nav>
+    <h2>Times</h2>
+</nav>
+<main>
+    <div class="scrollable-container">
 
-<p>avg time: {{ avg_time }}</p>
-
-<a href="{% url 'homepage' %}">homepage</a>
+        <ul>
+            {% for t in times %}
+                <li>{{ forloop.counter }} - {{ t }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <p class="avg_time">Avg time: <span class='res'>{{ avg_time }}</span></p>
+    
+    <button class='btn_homepage'><a href="{% url 'homepage' %}">homepage</a></button>
+</main>
 
 {% endblock %}

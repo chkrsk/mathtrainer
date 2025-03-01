@@ -54,7 +54,6 @@ def calculate(request):
     solved_problems = request.session.get('solved_problems', 0)
 
     if solved_problems > num_of_problems[0] - 1:
-        print('\n'*10, 'here', '\n'*10)
         request.session['solved_problems'] = 0
         return redirect('summary')
 
@@ -107,7 +106,7 @@ def calculate(request):
         'second_num': second_num,
         'operation': dict(Menu.math_operations)[operation[0]],
         'res': res,
-        'num_of_problems': num_of_problems,
+        'num_of_problems': num_of_problems[0],
         'solved_problems': solved_problems,
     })
 
@@ -121,7 +120,7 @@ def summary(request):
         return redirect("homepage")
 
     times = [float(t) for t in request.session.get("time", [])]
-    avg_time = sum(times) / len(times)
+    avg_time = round((sum(times) / len(times)), 2)
 
     context = {
         'times': times,

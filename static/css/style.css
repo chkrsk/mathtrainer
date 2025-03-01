@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+*{
+    font-family: "Funnel Sans", sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #E0F2F7;
+}
+h1{
+    font-size: 3em;
+    padding: 0;
+    margin: 0;
+}
+nav p{
+    font-size: 1.2em;
+    font-weight: 500;
+}
+input {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0.23em solid black #333333;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    background-color: #fafafa;
+}
+
+input:focus{
+    outline: none;
+    background-color: #fff;
+    border-color: #3498DB;
+}
+
+input[type="submit"] {
+    cursor: pointer;
+}
+
+/* combobox */
+select{
+    box-sizing: border-box;
+    border: 0.23em solid black #333333;
+    border-radius: 0.3em;
+    padding: 0.3em;
+    background-color: #fafafa;
+}
+
+select:focus{
+    outline: none;
+    background-color: #fff;
+    border-color: #3498DB;
+}
+
+option{
+    color: black;
+    background-color: #bbbbbb;
+}
+
+/* end combobox */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.scrollable-container {
+    max-height: 200px;
+    width: 30em;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    background-color: #b8e9f8;
+}
+
+.scrollable-container ul{
+    margin:0;
+    padding: 0;
+}
+
+.scrollable-container ul li{
+    list-style: none;
+    font-size: 1.1rem;
+    padding: 0;
+}
+
+.avg_time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+.avg_time .res {
+    color: red;
+    margin-left: 0.3rem;
+}
+
+nav a{
+    color: black;
+    text-decoration: none;
+}
+
+.btn_homepage{
+    text-transform: uppercase;
+}
+
+.btn_homepage a{
+    color: black;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.calculate_main {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.abort_panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    top: 0.2em; 
+    left: 15em;
+}
+
+.form_container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
