@@ -12,12 +12,6 @@ class CustomUserManager(BaseUserManager):
             raise ValueError("This email is already taken!")
         email = self.normalize_email(email)
 
-        # blocks of login validate
-        if "login" not in extra_fields or not extra_fields["login"]:
-            raise ValueError("The user must have a login!")
-        if self.model.objects.filter(login=extra_fields["login"]).exists():
-            raise ValueError("This login is already taken!")
-
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
@@ -38,7 +32,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    login = models.CharField(max_length=50, unique=True)
+    nickname = models.CharField(unique=True, max_length=50)
 
     number_of_sessions = models.IntegerField(default=0)
 
@@ -51,7 +45,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     objects = CustomUserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["login"]
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
