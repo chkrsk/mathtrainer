@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import CustomUserForm, LoginForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from .models import CustomUser
 
 # Create your views here.
 
@@ -43,6 +45,19 @@ def user_login(request):
 
     return render(request, 'pages/user_login.html', context)
 
+@login_required(login_url='login')
 def panel(request):
 
-    return render(request, 'pages/user_panel.html')
+
+    user = request.user
+
+    profile = CustomUser.objects.get(id=user.id)
+
+    context = {
+        'nickname': profile.nickname,
+        'email': profile.email,
+        'number_of_session': profile.number_of_sessions,
+        'date_joined': profile.date_joined,
+    }
+
+    return render(request, 'pages/user_panel.html', context)
