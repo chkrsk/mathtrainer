@@ -16,6 +16,9 @@
     </div>
     <div class="form_container">
         <form id="check_form" method="post">
+            {% if nick %}
+                <p>Good luck {{nick}}!</p>
+            {% endif %}
             <p>Oblicz: {{ first_num }} + {{ second_num }}</p>
             {% csrf_token %}
             <input id="check" type="text" name="answer" autocomplete="off" oninput="checkInput()">

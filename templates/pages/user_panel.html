@@ -1,1 +1,11 @@
 {% extends "layouts/layout.html" %}
+
+{% block content %}
+
+    <a href="{% url 'user_loguout' %}">logout</a>
+
+    <p>Hello {{nickname}}!</p>
+    <p>You joined {{date_joined}}</p>
+    <p>you exercised {{number_of_session}} times</p>
+
+{% endblock content %}

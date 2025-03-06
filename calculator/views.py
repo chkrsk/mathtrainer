@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import Menu
 import random
+from user.models import CustomUser
 
 # Create your views here.
 
@@ -21,7 +22,7 @@ def homepage(request):
         form = Menu()
 
     # clean session
-    request.session.flush()
+    request.session.pop('solved_problems', None)
 
     context = {
         'form': form
@@ -57,12 +58,14 @@ def calculate(request):
         request.session['solved_problems'] = 0
         return redirect('summary')
 
-    first_num_extrema = 10 ** (first_field[0] - 1), (10 ** first_field[0]) - 1
+    first_num_extrema = 10 ** (first_field[0] -
+                               1), (10 ** first_field[0]) - 1
     second_num_extrema = 10 ** (second_field[0] -
                                 1), (10 ** second_field[0]) - 1
 
     if operation[0] != 'division':
-        first_num = random.randint(first_num_extrema[0], first_num_extrema[1])
+        first_num = random.randint(
+            first_num_extrema[0], first_num_extrema[1])
         second_num = random.randint(
             second_num_extrema[0], second_num_extrema[1])
 
@@ -83,7 +86,7 @@ def calculate(request):
             For this reason we need to take the following steps:
             1. the first number is the result of multiplying two numbers
             2. we check whether the result is not longer than what the 
-               user selected (for the first number)
+            user selected (for the first number)
             '''
 
             quotient = random.randint(
@@ -108,6 +111,7 @@ def calculate(request):
         'res': res,
         'num_of_problems': num_of_problems[0],
         'solved_problems': solved_problems,
+        'nick': request.user.nickname if request.user.is_authenticated else "guest"
     })
 
     return render(request, 'pages/calculate.html', context)
@@ -118,6 +122,10 @@ def summary(request):
     # protect session
     if "first_field" not in request.session or "second_field" not in request.session or "operation" not in request.session:
         return redirect("homepage")
+    
+    if request.user.is_authenticated:
+        request.user.number_of_sessions += 1
+        request.user.save()
 
     times = [float(t) for t in request.session.get("time", [])]
     avg_time = round((sum(times) / len(times)), 2)
@@ -129,10 +137,11 @@ def summary(request):
 
     return render(request, 'pages/summary.html', context)
 
+
 def abort(request):
-    
+
     solved = len(request.session.get("time", []))
     if not solved:
         return redirect('homepage')
-    
+
     return redirect('summary')
