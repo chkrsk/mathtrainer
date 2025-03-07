@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import Menu
 import random
-from user.models import CustomUser
 
 # Create your views here.
 
@@ -130,6 +129,9 @@ def summary(request):
     times = [float(t) for t in request.session.get("time", [])]
     avg_time = round((sum(times) / len(times)), 2)
 
+    # clean session
+    request.session.pop('solved_problems', None)
+
     context = {
         'times': times,
         'avg_time': avg_time,
@@ -145,3 +147,9 @@ def abort(request):
         return redirect('homepage')
 
     return redirect('summary')
+
+def set_layout_session(request):
+
+    user = request.user
+    
+    return render(request, 'layouts/layout.html', {'user': user})

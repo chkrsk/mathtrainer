@@ -2,10 +2,19 @@
 
 {% block content %}
 
-    <a href="{% url 'user_loguout' %}">logout</a>
-
-    <p>Hello {{nickname}}!</p>
-    <p>You joined {{date_joined}}</p>
-    <p>you exercised {{number_of_session}} times</p>
+<div class="user-panel-container">
+    <div class="header">
+        <div class="logout">
+            <a href="{% url 'user_logout' %}">Logout</a>
+        </div>
+    </div>
+    <div class="user-panel">
+        <h1>Welcome, {{ nickname }}!</h1>
+        <div class="user-info">
+            <p><span class="label">Joined:</span> {{ date_joined }}</p>
+            <p><span class="label">Sessions:</span> You exercised {{ number_of_session }} times</p>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

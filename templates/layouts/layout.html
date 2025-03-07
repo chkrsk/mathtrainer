@@ -8,6 +8,25 @@
     <title> {% block title %}{% endblock title %} </title>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'homepage' %}">Homepage</a></li>
+
+                {% if user.is_authenticated %}
+
+                    <li><a href="{% url 'panel' %}">Panel</a></li>
+                    <li><a href="{% url 'user_logout' %}">Sign out</a></li>
+                
+                {% else %}
+
+                    <li><a href="{% url 'login' %}">Sign in</a></li>
+                    <li><a href="{% url 'register' %}">Sign up</a></li>
+
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
     {% block content %}{% endblock content %}
 </body>
 </html>
