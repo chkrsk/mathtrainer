@@ -7,16 +7,17 @@
     <h2>Times</h2>
 </nav>
 <main>
-    <div class="scrollable-container">
-
-        <ul>
-            {% for t in times %}
-                <li>{{ forloop.counter }} - {{ t }}</li>
-            {% endfor %}
-        </ul>
+    <div class="user-panel">
+        <div class="scrollable-container">
+            <ul>
+                {% for t in times %}
+                    <li>{{ forloop.counter }} - {{ t }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <p class="avg_time">Avg time: <span class='res'>{{ avg_time }}</span></p>
     </div>
-    
-    <p class="avg_time">Avg time: <span class='res'>{{ avg_time }}</span></p>
     
     <button class='btn_homepage'><a href="{% url 'homepage' %}">homepage</a></button>
 </main>

@@ -145,3 +145,67 @@ nav a{
     justify-content: center;
     width: 100%;
 }
+
+/* Kontener główny */
+.user-panel-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px; /* Ograniczenie szerokości dla lepszego wyglądu */
+    margin: 2em auto; /* Wyśrodkowanie i odstęp */
+}
+
+/* Header z logoutem */
+.header {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding: 1em;
+}
+
+/* Panel użytkownika */
+.user-panel {
+    background-color: #fff; /* Biały dla kontrastu z tłem strony */
+    border-radius: 0.5em;
+    padding: 2em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lekki cień */
+    text-align: center;
+}
+
+/* Stylizacja nagłówka */
+.user-panel h1 {
+    font-size: 2.5em; /* Trochę mniejszy niż 3em dla proporcji */
+    margin-bottom: 1em;
+    color: #333333;
+}
+
+/* Kontener na informacje */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.user-info .label {
+    font-weight: 600;
+    color: #3498DB;
+    margin-right: 0.5em;
+}
+
+.logout a {
+    padding: 8px 16px;
+    background-color: #dc3545;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.logout a:hover {
+    background-color: #c82333;
+}
+
+.logout a:active {
+    background-color: #bd2130;
+}

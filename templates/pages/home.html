@@ -9,14 +9,12 @@
     </nav>
 
     <main>
-        <form method="post">
-
-            {% csrf_token %}
-
-            {{ form.as_p }}
-
-            <input type="submit" value="Submit">
-
-        </form>
+        <div class="user-panel">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </main>
 {% endblock content %}
