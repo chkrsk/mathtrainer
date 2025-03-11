@@ -37,7 +37,7 @@ Math Trainer is a simple web application built with Django, designed to help use
 
 ## Future Features
 
-- Adding user accounts and the ability to save results.
+- Adding ability to save results.
 - Implementing more advanced modes for practicing math problems.
 - Possibility of adding an API in the future.
 
