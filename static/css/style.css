@@ -146,16 +146,14 @@ nav a{
     width: 100%;
 }
 
-/* Kontener główny */
 .user-panel-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 600px; /* Ograniczenie szerokości dla lepszego wyglądu */
-    margin: 2em auto; /* Wyśrodkowanie i odstęp */
+    max-width: 600px;
+    margin: 2em auto;
 }
 
-/* Header z logoutem */
 .header {
     display: flex;
     justify-content: flex-end;
@@ -163,23 +161,21 @@ nav a{
     padding: 1em;
 }
 
-/* Panel użytkownika */
 .user-panel {
-    background-color: #fff; /* Biały dla kontrastu z tłem strony */
+    background-color: #fff; 
     border-radius: 0.5em;
+    margin: 1.5em;
     padding: 2em;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Lekki cień */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-/* Stylizacja nagłówka */
 .user-panel h1 {
-    font-size: 2.5em; /* Trochę mniejszy niż 3em dla proporcji */
+    font-size: 2.5em;
     margin-bottom: 1em;
     color: #333333;
 }
 
-/* Kontener na informacje */
 .user-info {
     display: flex;
     flex-direction: column;
@@ -208,4 +204,46 @@ nav a{
 
 .logout a:active {
     background-color: #bd2130;
+}
+
+header {
+    background-color: #f0f8ff;
+    padding: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #1e90ff;
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background-color: #87cefa;
+    color: white;
+}
+
+nav ul li a:active {
+    background-color: #4169e1;
+}
+
+nav ul {
+    animation: fadeIn 0.5s ease-in;
 }
