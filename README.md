@@ -6,12 +6,13 @@ Math Trainer is a simple web application built with Django, designed to help use
 
 - Generates random math problems (addition, subtraction, multiplication, division).
 - Aimed at helping users practice and reinforce their memory of basic math operations.
-- Future plans may include adding user accounts and saving results (database functionality might be added in the future).
+- Future plans may include saving results (database functionality might be added in the future).
 
 ## Technologies
 
 - **Django** – A Python framework for building web applications.
 - **HTML, CSS, JavaScript** – Frontend technologies for displaying the user interface.
+- **Database** - SQLite (by default, but can be changed to PostgreSQL or MySQL if needed)
 
 ## Installation
 
@@ -27,7 +28,20 @@ Math Trainer is a simple web application built with Django, designed to help use
     cd mathtrainer
     ```
 
-3. Run the development server:
+3. Set up the .env file and configure SECRET_KEY (settings.py):
+
+    ```
+    SECRET_KEY=your_secure_key_here
+    ```
+
+4. Apply migrations:
+    
+    ```
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+5. Run the development server:
 
     ```bash
     python manage.py runserver
